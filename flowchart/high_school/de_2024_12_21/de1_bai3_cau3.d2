@@ -1,0 +1,61 @@
+# definition
+direction: right
+classes: {
+  endpoint: {
+    shape: circle
+    style: {
+      stroke-width: 0
+      fill: "#44C7B1"
+      shadow: true
+    }
+  }
+}
+**.style.border-radius: 5
+start.class: endpoint
+end.class: endpoint
+
+
+# workflow
+start -> get_string
+get_string -> init
+init  -> ele_in_string
+ele_in_string -> is_digit: lấy được
+
+is_digit -> append_to_number: đúng
+append_to_number -> ele_in_string
+
+is_digit -> number_is_digit: sai
+number_is_digit -> append_to_sum: đúng
+append_to_sum -> ele_in_string
+number_is_digit -> ele_in_string: sai
+
+ele_in_string -> number_is_digit_2: hết chuỗi
+number_is_digit_2 -> append_to_sum_2: đúng
+append_to_sum_2 -> return_sum
+number_is_digit_2 -> return_sum: sai
+return_sum -> end
+
+
+# labels
+get_string: lấy chuỗi
+init: khởi tạo\n tong = 0\n number = ""
+ele_in_string: {
+  shape: diamond
+  label: lấy 1 kí tự\n tiếp theo\n trong chuỗi
+}
+is_digit: {
+  shape: diamond
+  label: kí tự là số ?
+}
+append_to_number: thêm kí tự vào cuối number
+number_is_digit: {
+  shape: diamond
+  label: number là số ?
+}
+number_is_digit_2: {
+  shape: diamond
+  label: number là số ?
+}
+append_to_sum: tong += int(number)\n number = ""
+append_to_sum_2: tong += int(number)
+return_sum: trả về tổng tìm được

@@ -1,0 +1,58 @@
+# definition
+direction: right
+classes: {
+  endpoint: {
+    shape: circle
+    style: {
+      stroke-width: 0
+      fill: "#44C7B1"
+      shadow: true
+    }
+  }
+}
+**.style.border-radius: 5
+start.class: endpoint
+end.class: endpoint
+
+
+# workflow
+start -> get_string
+get_string -> get_number
+get_number -> number_is_none
+number_is_none -> return_none: đúng
+return_none -> end
+number_is_none -> number_equals_zero: sai
+number_equals_zero -> number_greater_zero: sai
+number_greater_zero -> return_none: sai
+number_greater_zero -> is_divisible_by_5: đúng
+is_divisible_by_5 -> remove_last_digit: sai
+remove_last_digit -> number_greater_zero
+is_divisible_by_5 -> return_number: đúng
+return_number -> end
+number_equals_zero -> return_zero: đúng
+return_zero -> end
+
+
+# labels
+get_string: lấy chuỗi
+get_number: lấy số number\n từ chuỗi
+number_is_none: {
+    shape: diamond
+    label: number is None ?
+}
+number_equals_zero: {
+    shape: diamond
+    label: number == 0 ?
+}
+number_greater_zero: {
+    shape: diamond
+    label: khi number > 0
+}
+is_divisible_by_5: {
+    shape: diamond
+    label: nếu number % 5 == 0
+}
+return_number: trả về number
+return_none: trả về None
+return_zero: trả về 0
+remove_last_digit: xoá chữ số hàng đơn vị\ncủa number

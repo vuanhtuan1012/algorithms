@@ -1,0 +1,50 @@
+# definition
+direction: right
+classes: {
+  endpoint: {
+    shape: circle
+    style: {
+      stroke-width: 0
+      fill: "#44C7B1"
+      shadow: true
+    }
+  }
+}
+**.style.border-radius: 5
+start.class: endpoint
+end.class: endpoint
+
+
+# workflow
+start -> get_string
+get_string -> init_number
+init_number -> ele_in_string
+ele_in_string -> is_digit: lấy được
+is_digit -> append_to_number: đúng
+append_to_number -> ele_in_string
+is_digit -> ele_in_string: sai
+ele_in_string -> number_is_digit: hết chuỗi
+number_is_digit -> return_number: đúng
+return_number -> end
+number_is_digit -> return_none: sai
+return_none -> end
+
+
+# labels
+get_string: lấy chuỗi
+init_number: khởi tạo biến\n number = ""
+ele_in_string: {
+  shape: diamond
+  label: lấy 1 kí tự\n tiếp theo\n trong chuỗi
+}
+is_digit: {
+  shape: diamond
+  label: kí tự là số ?
+}
+number_is_digit: {
+  shape: diamond
+  label: number là số ?
+}
+append_to_number: thêm kí tự vào cuối number
+return_number: trả về number\n ở kiểu số nguyên
+return_none: trả về None
