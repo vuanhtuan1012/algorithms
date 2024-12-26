@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2024-12-25 13:12:59
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2024-12-25 19:31:27
+# @Last Modified time: 2024-12-26 09:20:44
 
 """
 Đề số 1 - Bài 3 - Trang 7, 8
@@ -13,6 +13,11 @@ In ra màn hình:
 - Xoá một số chữ số của a để được số tự nhiên b lớn nhất chia hết cho 5.
   Nếu không tìm được in ra KHONG.
 - Số T là tổng các số có trong xâu S.
+
+Ví dụ: với S = hsg8ngay21thang4nam2023 thì in ra kết quả:
+a = 82142023
+b = 821420
+T = 2056
 """
 from typing import Optional
 
