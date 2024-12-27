@@ -18,41 +18,30 @@ end.class: endpoint
 # workflow
 start -> get_string
 get_string -> get_number
-get_number -> number_is_none
-number_is_none -> return_none: đúng
-return_none -> end
-number_is_none -> number_equals_zero: sai
-number_equals_zero -> number_greater_zero: sai
-number_greater_zero -> return_none: sai
-number_greater_zero -> is_divisible_by_5: đúng
-is_divisible_by_5 -> remove_last_digit: sai
-remove_last_digit -> number_greater_zero
+get_number -> number_not_empty
+
+number_not_empty -> is_divisible_by_5: đúng
 is_divisible_by_5 -> return_number: đúng
 return_number -> end
-number_equals_zero -> return_zero: đúng
-return_zero -> end
+
+is_divisible_by_5 -> remove_last_digit: sai
+remove_last_digit -> number_not_empty
+
+number_not_empty -> return_none: sai
+return_none -> end
 
 
 # labels
 get_string: lấy chuỗi
-get_number: lấy số number\n từ chuỗi
-number_is_none: {
+get_number: lấy string number\n từ chuỗi
+number_not_empty: {
     shape: diamond
-    label: number is None ?
-}
-number_equals_zero: {
-    shape: diamond
-    label: number == 0 ?
-}
-number_greater_zero: {
-    shape: diamond
-    label: khi number > 0
+    label: while number\nis not empty
 }
 is_divisible_by_5: {
     shape: diamond
-    label: nếu number % 5 == 0
+    label: nếu int(number) % 5 == 0
 }
 return_number: trả về number
 return_none: trả về None
-return_zero: trả về 0
-remove_last_digit: xoá chữ số hàng đơn vị\ncủa number
+remove_last_digit: xoá chữ số cuối cùng\ncủa number

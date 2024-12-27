@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2024-12-25 13:12:59
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2024-12-26 09:20:44
+# @Last Modified time: 2024-12-27 11:07:32
 
 """
 Đề số 1 - Bài 3 - Trang 7, 8
@@ -22,7 +22,7 @@ T = 2056
 from typing import Optional
 
 
-def tim_so(string: str) -> Optional[int]:
+def tim_so(string: str) -> str:
     """
     Returns number after removing letters in the given string
     """
@@ -30,7 +30,7 @@ def tim_so(string: str) -> Optional[int]:
     for element in string:
         if element.isdigit():
             number += element
-    return int(number) if number.isdigit() else None
+    return number
 
 
 def giai_cau_1(string: str):
@@ -38,26 +38,21 @@ def giai_cau_1(string: str):
     Prints the number after removing letters in the given string
     """
     number = tim_so(string)
-    if number is None:
-        print("Khong co so trong chuoi!")
-    else:
+    if number:
         print(f"a = {number}")
+    else:
+        print("Khong co so trong chuoi!")
 
 
-def tim_so_lon_nhat_chc_5(number: Optional[int]) -> Optional[int]:
+def tim_so_lon_nhat_chc_5(number: str) -> Optional[str]:
     """
     Returns the largest number divisible by 5
     by removing some digits from the given number
     """
-    if number is None:
-        return None
-    if number == 0:
-        return 0
-
-    while number > 0:
-        if number % 5 == 0:
+    while number:
+        if int(number) % 5 == 0:
             return number
-        number //= 10
+        number = number[:-1]
     return None
 
 
@@ -98,15 +93,22 @@ def giai_cau_3(string: str):
     print(f"T = {tim_tong(string)}")
 
 
-def dry_test():
+def dry_tests():
     """
-    Dry test
+    Dry tests
     """
-    string = "hsg8ngay21thang4nam2023"
-    print(f"S = {string}")
-    giai_cau_1(string)
-    giai_cau_2(string)
-    giai_cau_3(string)
+    strings = [
+        "hsg8ngay21thang4nam2023",
+        "ngay8thang12",
+        "ngay08thang12",
+        "daylachuoikhongcoso",
+        "daylachuoi0coso",
+    ]
+    for string in strings:
+        print(f"\nS = {string}")
+        giai_cau_1(string)
+        giai_cau_2(string)
+        giai_cau_3(string)
 
 
 def main():
