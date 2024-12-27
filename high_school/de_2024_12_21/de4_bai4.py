@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2024-12-25 15:52:23
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2024-12-26 06:27:55
+# @Last Modified time: 2024-12-27 10:10:47
 
 """
 Đề số 4 - Bài 4 - Trang 31
@@ -20,7 +20,6 @@ Giải thích: 60 = 5^2 + 4^2 + 3^2 + 3^2 + 1^2
                = ...
 Chọn phương án 7^2 + 3^2 + 1^2 + 1^2 vì có ít số hạng nhất và có chứa số hạng lớn nhất 7^2.
 """
-import math
 from typing import List
 
 
@@ -31,7 +30,7 @@ def tim_tong_binh_phuong(number: int) -> List[int]:
     """
     elements = []
     while number != 0:
-        element = math.floor(number**0.5)
+        element = int(number**0.5)
         elements.append(element)
         number -= element**2
     return elements
