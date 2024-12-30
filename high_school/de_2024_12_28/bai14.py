@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2024-12-30 19:31:26
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2024-12-30 20:22:11
+# @Last Modified time: 2024-12-30 22:49:51
 
 """
 Bài 14
@@ -28,8 +28,8 @@ def doc_file(filename: str) -> Tuple[int, List[int]]:
     """
     Returns the total and the list of numbers read from the given file
     """
-    print(f"Doc file {filename}.")
     total, numbers = -1, []
+    print(f"Doc file {filename}.")
     with open(filename, encoding="utf-8") as file_pointer:
         for i, line in enumerate(file_pointer):
             if i == 0:
