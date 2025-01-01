@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-01 09:08:17
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-01 09:21:18
+# @Last Modified time: 2025-01-01 11:13:35
 
 """
 Bài 21
@@ -26,13 +26,14 @@ def doc_file(filename: str) -> List[int]:
     """
     Returns the list of numbers read from the second line of given file
     """
+    numbers = []
     print(f"Doc file {filename}.")
     with open(filename, encoding="utf-8") as file_pointer:
         for i, line in enumerate(file_pointer):
             if i != 1:  # read only the second line
                 continue
             numbers = list(map(int, line.split()))
-            return numbers
+    return numbers
 
 
 def dem_so_lan_xuat_hien(numbers: List[int]) -> Dict[int, int]:

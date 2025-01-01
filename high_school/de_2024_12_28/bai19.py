@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-01 06:51:06
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-01 07:05:32
+# @Last Modified time: 2025-01-01 11:13:13
 
 """
 Bài 19
@@ -24,13 +24,14 @@ def doc_file(filename: str) -> List[int]:
     """
     Returns the list of numbers read from the second line of given file
     """
+    numbers = []
     print(f"Doc file {filename}.")
     with open(filename, encoding="utf-8") as file_pointer:
         for i, line in enumerate(file_pointer):
             if i != 1:  # read only the second line
                 continue
             numbers = list(map(int, line.split()))
-            return numbers
+    return numbers
 
 
 def xoa_trung(numbers: List[int]) -> List[int]:

@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2024-12-29 10:17:08
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2024-12-30 19:16:48
+# @Last Modified time: 2025-01-01 11:12:28
 
 """
 Bài 13
@@ -25,13 +25,14 @@ def doc_file(filename: str) -> List[int]:
     """
     Returns the list of numbers read from the second line of given file
     """
+    numbers = []
     print(f"Doc file {filename}.")
     with open(filename, encoding="utf-8") as file_pointer:
         for i, line in enumerate(file_pointer):
             if i != 1:  # read only the second line
                 continue
             numbers = list(map(int, line.split()))
-            return numbers
+    return numbers
 
 
 def tim_cac_chuoi_con(numbers: List[int]) -> List[List[int]]:
