@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-01 13:33:42
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-01 13:50:05
+# @Last Modified time: 2025-01-01 14:00:07
 
 """
 Bài 25
@@ -37,7 +37,7 @@ def doc_file(filename: str) -> List[int]:
 
 def tim_day_con_bang_nhau(numbers: List[int]) -> List[List[int]]:
     """
-    Returns the sequence of subsequences with equal elements
+    Returns the sequence of subsequences whose consecutive elements are equal
     """
     sequence = []
     subsequence = []
