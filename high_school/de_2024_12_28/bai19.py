@@ -2,12 +2,13 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-01 06:51:06
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-01 07:02:06
+# @Last Modified time: 2025-01-01 07:05:32
 
 """
 Bài 19
 
 Xoá các phần tử giống nhau trong dãy số, chỉ giữ lại những phần tử đại diện mỗi số.
+Sau khi xoá, đưa dãy số ra màn hình.
 
 Ví dụ:
 xoatrung.inp
