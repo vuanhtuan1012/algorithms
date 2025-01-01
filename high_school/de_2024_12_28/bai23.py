@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-01 11:16:41
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-01 11:37:14
+# @Last Modified time: 2025-01-01 12:34:15
 
 """
 Bài 23
@@ -35,33 +35,33 @@ def doc_file(filename: str) -> List[int]:
     return numbers
 
 
-def tim_day_khong_giam(numbers: List[int]) -> List[List[int]]:
+def tim_day_con_khong_giam(numbers: List[int]) -> List[List[int]]:
     """
-    Returns the sequence of non-decreasing subsequences of the given sequence
+    Returns the sequence of non-decreasing subsequences of the given list of numbers
     """
-    sequence = []
+    sequences = []
     subsequence = []
     for i in range(len(numbers) - 1):
         subsequence.append(numbers[i])
         if numbers[i] > numbers[i + 1]:
-            sequence.append(subsequence)
+            sequences.append(subsequence)
             subsequence = []
     subsequence.append(numbers[-1])
-    sequence.append(subsequence)
-    return sequence
+    sequences.append(subsequence)
+    return sequences
 
 
-def tim_day_con_dai_nhat(sequence: List[List[int]]) -> List[int]:
+def tim_day_con_dai_nhat(sequences: List[List[int]]) -> List[int]:
     """
-    Returns the longest subsequence
+    Returns the longest subsequence from the given list of sequences
     """
     # get the max length
     max_length = 0
-    for subsequence in sequence:
-        max_length = max(max_length, len(subsequence))
+    for sequence in sequences:
+        max_length = max(max_length, len(sequence))
 
     # get the longest subsequence
-    for subsequence in sequence:
+    for subsequence in sequences:
         if len(subsequence) == max_length:
             return subsequence
     return []
@@ -83,9 +83,9 @@ def main():
     Main function
     """
     numbers = doc_file("data/daykt.inp")
-    sequence = tim_day_khong_giam(numbers)
-    subsequence = tim_day_con_dai_nhat(sequence)
-    ghi_file(subsequence, "data/daykt.out")
+    sequence = tim_day_con_khong_giam(numbers)
+    longest_subsequence = tim_day_con_dai_nhat(sequence)
+    ghi_file(longest_subsequence, "data/daykt.out")
 
 
 if __name__ == "__main__":
