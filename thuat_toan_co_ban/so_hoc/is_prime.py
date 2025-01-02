@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2024-11-08 16:45:44
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-02 22:12:33
+# @Last Modified time: 2025-01-02 22:51:01
 
 """
 Viết một hàm xác định xem một số nguyên dương đã cho có phải là số nguyên tố hay không.
@@ -25,8 +25,8 @@ def dry_tests():
     """
     Dry tests
     """
-    numbers = [(47, True), (4, False), (133, False), (0, False)]
-    for number, ground_truth in numbers:
+    test_cases = [(47, True), (4, False), (133, False), (0, False)]
+    for number, ground_truth in test_cases:
         result = is_prime(number)
         print(f"is_prime({number}) = {result}: {result == ground_truth}")
 
