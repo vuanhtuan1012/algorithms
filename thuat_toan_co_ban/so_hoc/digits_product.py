@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-04 23:33:27
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-05 21:38:10
+# @Last Modified time: 2025-01-06 23:52:36
 
 """
 Cho trước số tự nhiên number
@@ -78,11 +78,11 @@ def dry_tests():
     Dry tests
     """
     test_cases = [(12, 26), (19, -1), (450, 2559), (0, 10), (13, -1), (108, 269)]
-    print("Tests on version 1:")
+    print("Tests the first solution:")
     for number, ground_truth in test_cases:
         result = find_digits_product(number)
         print(f"- find_digits_product({number}) = {result}: {result == ground_truth}")
-    print("Tests on version 2:")
+    print("Tests the second solution:")
     for number, ground_truth in test_cases:
         result = find_digits_product_v2(number)
         print(
