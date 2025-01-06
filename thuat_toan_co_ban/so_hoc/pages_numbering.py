@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-06 23:15:51
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-06 23:51:08
+# @Last Modified time: 2025-01-06 23:53:25
 
 """
 Cho biết số trang sách của 1 quyển sách.
@@ -53,13 +53,13 @@ def dry_tests():
     Dry tests
     """
     test_cases = [(11, 13), (1000, 2893), (13, 17), (1, 1)]
-    print("Tests on first solution:")
+    print("Tests the first solution:")
     for no_pages, ground_truth in test_cases:
         result = get_number_of_digits_used(no_pages)
         print(
             f"- get_number_of_digits_used({no_pages}) = {result}: {result == ground_truth}"
         )
-    print("Tests on second solution:")
+    print("Tests the second solution:")
     for no_pages, ground_truth in test_cases:
         result = get_number_of_digits_used_v2(no_pages)
         print(
