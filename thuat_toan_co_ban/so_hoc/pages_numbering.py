@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-06 23:15:51
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-06 23:31:40
+# @Last Modified time: 2025-01-06 23:44:02
 
 """
 Cho biết số trang sách của 1 quyển sách.
@@ -20,12 +20,12 @@ def get_number_of_digits_used(no_pages: int) -> int:
     """
     no_digits_used = 0
     degree = 1
-    current_digits_used = 10**degree - 10 ** (degree - 1)
-    while no_pages > current_digits_used:
-        no_pages -= current_digits_used
-        no_digits_used += current_digits_used * degree
+    no_elements = 10**degree - 10 ** (degree - 1)
+    while no_pages > no_elements:
+        no_pages -= no_elements
+        no_digits_used += no_elements * degree
         degree += 1
-        current_digits_used = 10**degree - 10 ** (degree - 1)
+        no_elements = 10**degree - 10 ** (degree - 1)
 
     if no_pages > 0:
         no_digits_used += no_pages * degree
