@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-07 23:48:42
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-09 17:59:44
+# @Last Modified time: 2025-01-09 22:14:17
 
 """
 Cho số nguyên n, hãy tính tổng các số nguyên tố nhỏ hơn hoặc bằng n.
@@ -17,28 +17,32 @@ Ví dụ:
 from typing import List
 
 
-def sieve_eratosthenes(number: int) -> List[int]:
+# declare constants
+MOD = 22082018
+
+
+def get_sieve_eratosthenes(number: int) -> List[int]:
     """
-    Returns list of prime numbers which are less than or equal the given number
+    Returns the sieve Eratosthenes util the given number
     """
-    is_prime_numbers = [True for _ in range(number + 1)]
-    is_prime_numbers[0] = is_prime_numbers[1] = False
-    for i in range(2, number + 1):
-        j = 2
-        idx = i * j
-        while idx <= number:
-            if is_prime_numbers[idx]:
-                is_prime_numbers[idx] = False
-            j += 1
-            idx = i * j
-    return [element for element in range(number + 1) if is_prime_numbers[element]]
+    sieve = list(range(number + 1))
+    sieve[1] = 0
+    for i in range(2, int(number**0.5) + 1):
+        if sieve[i]:
+            for j in range(i * i, number + 1, i):
+                sieve[j] = 0
+    return sieve
 
 
 def get_prime_sum(number: int) -> int:
     """
     Returns the sum of prime numbers which are less than or equal the given number
     """
-    return sum(sieve_eratosthenes(number))
+    total = 0
+    sieve = get_sieve_eratosthenes(number)
+    for element in sieve:
+        total = (total + element % MOD) % MOD
+    return total
 
 
 def dry_tests():
