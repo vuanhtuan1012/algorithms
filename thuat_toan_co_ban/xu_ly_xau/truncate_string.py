@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-15 22:19:52
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-15 22:22:00
+# @Last Modified time: 2025-01-15 22:39:55
 
 """
 Cho một xâu kí tự chứa các chữ số từ 0 tới 9.
@@ -20,3 +20,39 @@ Cho một xâu kí tự, hãy tìm xâu kết quả cuối cùng khi áp dụng 
 Ví dụ:
 - truncateString("312248") = "2"
 """
+
+
+def truncate_string(string: str) -> str:
+    """
+    Returns the string truncated
+    """
+    prev_string = ""
+    while string not in ("", prev_string):
+        prev_string = string
+        if int(string[0]) % 3 == 0:
+            string = string[1:]
+        elif int(string[-1]) % 3 == 0:
+            string = string[:-1]
+        elif (int(string[0]) + int(string[-1])) % 3 == 0:
+            string = string[1:-1]
+    return string
+
+
+def dry_tests():
+    """
+    Dry tests
+    """
+    test_cases = [
+        ("312248", "2"),
+        ("366936363", ""),
+        ("57439552816", "55"),
+        ("3333333", ""),
+        ("90909", ""),
+    ]
+    for string, ground_truth in test_cases:
+        result = truncate_string(string)
+        print(f"truncate_string({string}) = {result}: {result == ground_truth}")
+
+
+if __name__ == "__main__":
+    dry_tests()
