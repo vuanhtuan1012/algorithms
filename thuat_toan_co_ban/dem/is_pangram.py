@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-01 23:43:21
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-01 23:51:51
+# @Last Modified time: 2025-02-01 23:53:41
 
 """
 Một pangram là một câu mà mỗi kí tự chữ cái (a-z) được sử dụng ít nhất một lần.
@@ -24,3 +24,23 @@ def is_pangram(sentence: str) -> bool:
         if letter not in sentence:
             return False
     return True
+
+
+def dry_tests():
+    """
+    Dry tests
+    """
+    test_cases = [
+        ("The quick brown fox jumps over the lazy dog.", True),
+        ("abcdefghijklmnopqrstuvwxya", False),
+        ("plmkonjiBhuvgycftxdrzseAwq", True),
+        ("qwer36.tyuioplkjdchgf,dsazxcvbnmpoic(dgfu)ytrewqas dfghjkgbblmnbvcxz", True),
+        ("asdfukhiuleflodsifjpdocvikzx[lcpwd[xscdwr235u6702-132=", False),
+    ]
+    for i, (sentence, ground_truth) in enumerate(test_cases, start=1):
+        result = is_pangram(sentence)
+        print(f"Test case {i}: {result == ground_truth}")
+
+
+if __name__ == "__main__":
+    dry_tests()
