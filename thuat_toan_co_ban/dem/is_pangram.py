@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-01 23:43:21
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-01 23:49:00
+# @Last Modified time: 2025-02-01 23:51:51
 
 """
 Một pangram là một câu mà mỗi kí tự chữ cái (a-z) được sử dụng ít nhất một lần.
@@ -18,6 +18,7 @@ def is_pangram(sentence: str) -> bool:
     """
     Returns True if the given sentence is pangram, otherwise False
     """
+    sentence = sentence.lower()
     for code in range(ord("a"), ord("z") + 1):
         letter = chr(code)
         if letter not in sentence:
