@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-02 17:39:54
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-02 18:49:43
+# @Last Modified time: 2025-02-02 18:52:56
 
 """
 Cho một ma trận chữ nhật chứa các chữ số (0-9).
@@ -40,3 +40,31 @@ def count_different_squares(matrix: List[List[int]]) -> int:
             str_square = to_string(square)
             squares.add(str_square)
     return len(squares)
+
+
+def dry_tests():
+    """
+    Dry tests
+    """
+    test_cases = [
+        ([[1, 2, 1], [2, 2, 2], [2, 2, 2], [1, 2, 3], [2, 2, 1]], 6),
+        (
+            [
+                [9, 9, 9, 9, 9],
+                [9, 9, 9, 9, 9],
+                [9, 9, 9, 9, 9],
+                [9, 9, 9, 9, 9],
+                [9, 9, 9, 9, 9],
+                [9, 9, 9, 9, 9],
+            ],
+            1,
+        ),
+        ([[3]], 0),
+    ]
+    for i, (matrix, ground_truth) in enumerate(test_cases, start=1):
+        result = count_different_squares(matrix)
+        print(f"Test case {i}: {result == ground_truth}")
+
+
+if __name__ == "__main__":
+    dry_tests()
