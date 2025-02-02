@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-02 17:39:54
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-02 18:52:56
+# @Last Modified time: 2025-02-02 19:02:33
 
 """
 Cho một ma trận chữ nhật chứa các chữ số (0-9).
@@ -27,16 +27,30 @@ def to_string(square: List[List[int]]) -> str:
     return "\n".join(map(str, ("".join(map(str, row)) for row in square)))
 
 
-def count_different_squares(matrix: List[List[int]]) -> int:
+def build_square(
+    row_idx: int, col_idx: int, matrix: List[List[int]], size: int
+) -> List[List[int]]:
     """
-    Returns number of different 2x2 squares in the given matrix
+    Returns the squre of given size in given matrix
+    starting from the coordinator (row_index, col_index)
+    """
+    square = []
+    for i in range(size):
+        row = matrix[row_idx + i][col_idx : col_idx + size]
+        square.append(row)
+    return square
+
+
+def count_different_squares(matrix: List[List[int]], size: int = 2) -> int:
+    """
+    Returns number of different squares of given size in the given matrix
     """
     squares = set()
     no_rows = len(matrix)
     no_columns = len(matrix[0]) if no_rows > 0 else 0
-    for i in range(no_rows - 1):
-        for j in range(no_columns - 1):
-            square = [matrix[i][j : j + 2], matrix[i + 1][j : j + 2]]
+    for i in range(no_rows + 1 - size):
+        for j in range(no_columns + 1 - size):
+            square = build_square(i, j, matrix, size)
             str_square = to_string(square)
             squares.add(str_square)
     return len(squares)
