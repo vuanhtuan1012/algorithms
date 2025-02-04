@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-04 15:51:04
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-04 23:39:18
+# @Last Modified time: 2025-02-04 23:48:12
 
 """
 Bàn cờ vua là một bảng có 8*8 ô vuông.
@@ -40,7 +40,7 @@ def is_capturable(bishop_square: str, pawn_square: str) -> bool:
     bishop_coordinate = square_to_coordinate(bishop_square)
     pawn_coordinate = square_to_coordinate(pawn_square)
     return (
-        abs(bishop_coordinate[0] + pawn_coordinate[0])
-        == abs(bishop_coordinate[1] + pawn_coordinate[1])
+        abs(bishop_coordinate[0] - pawn_coordinate[0])
+        == abs(bishop_coordinate[1] - pawn_coordinate[1])
         and bishop_coordinate[0] != pawn_coordinate[0]
     )
