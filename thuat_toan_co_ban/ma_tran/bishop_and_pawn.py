@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-04 15:51:04
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-04 17:14:31
+# @Last Modified time: 2025-02-04 23:39:18
 
 """
 Bàn cờ vua là một bảng có 8*8 ô vuông.
@@ -23,57 +23,24 @@ Ví dụ:
 - bishopAndPawn("h1", "h3") = False
 """
 
-from typing import List, Tuple
+from typing import Tuple
 
 
-def coordinate_to_square(coordinate: Tuple[int, int]) -> str:
+def square_to_coordinate(square: str) -> Tuple[int, int]:
     """
-    Returns the square of the given coordinate
+    Returns the coordinate of the given square
     """
-    col, row = coordinate
-    return f"{chr(col)}{row}"
-
-
-def get_capturable_squares(bishop_square: str) -> List[str]:
-    """
-    Returns list of squares which are capturable by the given bishop square
-    """
-    capturable_squares = []
-    bishop_col, bishop_row = ord(bishop_square[0].upper()), int(bishop_square[1])
-
-    # first quadrant
-    cur_col, cur_row = bishop_col, bishop_row
-    while cur_col < ord("H") and cur_row < 8:
-        cur_col += 1
-        cur_row += 1
-        capturable_squares.append(coordinate_to_square((cur_col, cur_row)))
-
-    # second quadrant
-    cur_col, cur_row = bishop_col, bishop_row
-    while cur_col > ord("A") and cur_row < 8:
-        cur_col -= 1
-        cur_row += 1
-        capturable_squares.append(coordinate_to_square((cur_col, cur_row)))
-
-    # third quadrant
-    cur_col, cur_row = bishop_col, bishop_row
-    while cur_col > ord("A") and cur_row > 1:
-        cur_col -= 1
-        cur_row -= 1
-        capturable_squares.append(coordinate_to_square((cur_col, cur_row)))
-
-    # forth quadrant
-    cur_col, cur_row = bishop_col, bishop_row
-    while cur_col < ord("H") and cur_row > 1:
-        cur_col += 1
-        cur_row -= 1
-        capturable_squares.append(coordinate_to_square((cur_col, cur_row)))
-
-    return capturable_squares
+    return ord(square[0].upper()), int(square[1])
 
 
 def is_capturable(bishop_square: str, pawn_square: str) -> bool:
     """
     Returns True if the given bishop can capture the given paw, otherwise False
     """
-    return pawn_square.upper() in get_capturable_squares(bishop_square)
+    bishop_coordinate = square_to_coordinate(bishop_square)
+    pawn_coordinate = square_to_coordinate(pawn_square)
+    return (
+        abs(bishop_coordinate[0] + pawn_coordinate[0])
+        == abs(bishop_coordinate[1] + pawn_coordinate[1])
+        and bishop_coordinate[0] != pawn_coordinate[0]
+    )
