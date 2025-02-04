@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-03 11:18:42
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-03 11:47:31
+# @Last Modified time: 2025-02-04 15:45:52
 
 """
 Cho địa chỉ hai ô trên bàn cờ vua tiêu chuẩn, hãy kiểm tra chúng cùng màu hay khác màu.
@@ -26,10 +26,10 @@ def is_same_color(first_cell: str, second_cell: str) -> bool:
     """
     Returns True if two given cell are the same color, otherwise False
     """
-    diff = sum(
+    manhattan_distance = sum(
         get_indexes(first_cell)[i] - get_indexes(second_cell)[i] for i in range(2)
     )
-    return diff % 2 == 0
+    return manhattan_distance % 2 == 0
 
 
 def dry_tests():
