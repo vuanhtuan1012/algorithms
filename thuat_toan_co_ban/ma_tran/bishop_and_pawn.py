@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-04 15:51:04
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-04 23:48:12
+# @Last Modified time: 2025-02-04 23:48:53
 
 """
 Bàn cờ vua là một bảng có 8*8 ô vuông.
@@ -44,3 +44,24 @@ def is_capturable(bishop_square: str, pawn_square: str) -> bool:
         == abs(bishop_coordinate[1] - pawn_coordinate[1])
         and bishop_coordinate[0] != pawn_coordinate[0]
     )
+
+
+def dry_tests():
+    """
+    Dry tests
+    """
+    test_cases = [
+        ("a1", "c3", True),
+        ("h1", "h1", False),
+        ("a5", "c3", True),
+        ("g1", "f3", False),
+        ("e7", "d6", True),
+    ]
+
+    for i, (bishop_square, pawn_square, ground_truth) in enumerate(test_cases, start=1):
+        result = is_capturable(bishop_square, pawn_square)
+        print(f"Test case {i}: {result == ground_truth}")
+
+
+if __name__ == "__main__":
+    dry_tests()
