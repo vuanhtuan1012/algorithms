@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-01-03 23:02:21
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-01-03 23:47:35
+# @Last Modified time: 2025-02-05 00:37:51
 
 """
 Tìm chữ số khác không cuối cùng của n! (giai thừa)
@@ -20,7 +20,7 @@ def find_last_non_zero_digit(number: int) -> int:
     """
     product = 1
 
-    # remove trailing zeros
+    # calculate product
     for i in range(2, number + 1):
         product *= i
 
@@ -31,9 +31,6 @@ def find_last_non_zero_digit(number: int) -> int:
         # prevent product from becoming too large
         product %= 100
 
-    # post cleanup
-    if product % 10 == 0:
-        product //= 10
     return product % 10
 
 
