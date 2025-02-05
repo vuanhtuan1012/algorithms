@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-04 15:51:04
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-04 23:48:53
+# @Last Modified time: 2025-02-05 15:50:16
 
 """
 Bàn cờ vua là một bảng có 8*8 ô vuông.
@@ -35,15 +35,24 @@ def square_to_coordinate(square: str) -> Tuple[int, int]:
 
 def is_capturable(bishop_square: str, pawn_square: str) -> bool:
     """
-    Returns True if the given bishop can capture the given paw, otherwise False
+    Returns True if the given bishop can capture the given pawn, otherwise False
+
+    A bishop can capture a pawn if they're on the same diagonal.
+    There're two type of diagonals:
+    - main diagonal: from top-left to bottom-right
+    - secondary diagonal: from top-right to bottom-left
+
+    Two squares (x, y) and (u, v) are on the:
+    - main diagonal <=> x - y = u - v
+    - secondary diagonal <=> x + y = u + v
     """
     bishop_coordinate = square_to_coordinate(bishop_square)
     pawn_coordinate = square_to_coordinate(pawn_square)
-    return (
-        abs(bishop_coordinate[0] - pawn_coordinate[0])
-        == abs(bishop_coordinate[1] - pawn_coordinate[1])
-        and bishop_coordinate[0] != pawn_coordinate[0]
+    on_same_diagonal = abs(bishop_coordinate[0] - pawn_coordinate[0]) == abs(
+        bishop_coordinate[1] - pawn_coordinate[1]
     )
+    is_different = bishop_coordinate[0] != pawn_coordinate[0]
+    return on_same_diagonal and is_different
 
 
 def dry_tests():
