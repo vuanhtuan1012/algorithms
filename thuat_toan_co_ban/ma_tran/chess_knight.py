@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-05 16:08:03
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-05 17:42:55
+# @Last Modified time: 2025-02-05 17:50:00
 
 """
 Bàn cờ vua là một bảng có 8*8 ô vuông.
@@ -38,8 +38,22 @@ def get_no_positions(knight_square: str) -> int:
     no_positions = 0
     current_coordinate = square_to_coordinate(knight_square)
     for col_delta, row_delta in changes:
-        col = current_coordinate[0] + col_delta
-        row = current_coordinate[1] + row_delta
-        if ord("A") <= col <= ord("H") and 1 <= row <= 8:
+        col_idx = current_coordinate[0] + col_delta
+        row_idx = current_coordinate[1] + row_delta
+        if ord("A") <= col_idx <= ord("H") and 1 <= row_idx <= 8:
             no_positions += 1
     return no_positions
+
+
+def dry_tests():
+    """
+    Dry tests
+    """
+    test_cases = [("a1", 2), ("c2", 6), ("d4", 8), ("g6", 6), ("a3", 4)]
+    for i, (square, ground_truth) in enumerate(test_cases, start=1):
+        result = get_no_positions(square)
+        print(f"Test case {i}: {result == ground_truth}")
+
+
+if __name__ == "__main__":
+    dry_tests()
