@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-07 21:22:52
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-08 00:16:12
+# @Last Modified time: 2025-02-08 00:17:45
 """
 Tổng đoạn con
 
@@ -51,7 +51,7 @@ def tim_doan(day_so: List[int], tong_doan: int) -> List[Tuple[int, int]]:
         if element > tong_doan:
             continue
         j = i + 1
-        while j < len(day_so) and sum(day_so[i:j]) < tong_doan:
+        while j <= len(day_so) and sum(day_so[i:j]) < tong_doan:
             j += 1
         if sum(day_so[i:j]) == tong_doan:
             cac_doan_con.append((i + 1, len(day_so[i:j])))
