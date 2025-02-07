@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-07 21:22:52
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-07 22:33:28
+# @Last Modified time: 2025-02-08 00:16:12
 """
 Tổng đoạn con
 
@@ -41,9 +41,9 @@ def doc_file(filename: str) -> Tuple[int, List[int]]:
     return tong_doan, day_so
 
 
-def tim_doan(day_so: List[int], tong_doan: int) -> List[Tuple[int, List[int]]]:
+def tim_doan(day_so: List[int], tong_doan: int) -> List[Tuple[int, int]]:
     """
-    Returns the index (1-index) of starting element along with the list of subsequences
+    Returns the index (1-index) of starting element along with the length of subsequence
     whose sum of subsequence elements equals the given total
     """
     cac_doan_con = []
@@ -54,25 +54,23 @@ def tim_doan(day_so: List[int], tong_doan: int) -> List[Tuple[int, List[int]]]:
         while j < len(day_so) and sum(day_so[i:j]) < tong_doan:
             j += 1
         if sum(day_so[i:j]) == tong_doan:
-            cac_doan_con.append((i + 1, day_so[i:j]))
+            cac_doan_con.append((i + 1, len(day_so[i:j])))
     return cac_doan_con
 
 
-def tim_doan_ngan_nhat(
-    cac_doan_con: List[Tuple[int, List[int]]]
-) -> Tuple[int, List[int]]:
+def tim_doan_ngan_nhat(cac_doan_con: List[Tuple[int, int]]) -> Tuple[int, int]:
     """
     Returns the tuple of the index of starting element along with
     the list of the shortest subsequence
     """
     if not cac_doan_con:
         return 0, 0
-    chi_so, doan_ngan_nhat = cac_doan_con[0]
-    for idx, doan_con in cac_doan_con:
-        if len(doan_con) < len(doan_ngan_nhat):
+    chi_so, do_dai_ngan_nhat = cac_doan_con[0]
+    for idx, do_dai in cac_doan_con:
+        if do_dai_ngan_nhat > do_dai:
             chi_so = idx
-            doan_ngan_nhat = doan_con
-    return chi_so, doan_ngan_nhat
+            do_dai_ngan_nhat = do_dai
+    return chi_so, do_dai_ngan_nhat
 
 
 def ghi_file(filename: str, *args: Tuple[int, ...]):
@@ -90,11 +88,11 @@ def main():
     """
     tong_doan, day_so = doc_file("data/tdoan.inp")
     cac_doan_con = tim_doan(day_so, tong_doan)
-    chi_so, doan_ngan_nhat = tim_doan_ngan_nhat(cac_doan_con)
+    chi_so, do_dai_ngan_nhat = tim_doan_ngan_nhat(cac_doan_con)
     if chi_so == 0:
         ghi_file("data/tdoan.out", chi_so)
         return
-    ghi_file("data/tdoan.out", chi_so, len(doan_ngan_nhat))
+    ghi_file("data/tdoan.out", chi_so, do_dai_ngan_nhat)
 
 
 if __name__ == "__main__":
