@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-07 21:22:52
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-07 21:29:34
+# @Last Modified time: 2025-02-07 22:33:28
 """
 Tổng đoạn con
 
@@ -25,3 +25,77 @@ Ví dụ:
 - File output: tdoan.out
 16 3
 """
+
+from typing import List, Tuple
+
+
+def doc_file(filename: str) -> Tuple[int, List[int]]:
+    """
+    Returns tuple of subsequence total and the list of elements
+    """
+    print(f"Read file {filename}")
+    with open(filename, encoding="utf-8") as file_pointer:
+        data = file_pointer.readlines()
+    _, tong_doan = map(int, data[0].strip().split())
+    day_so = list(map(int, data[1].strip().split()))
+    return tong_doan, day_so
+
+
+def tim_doan(day_so: List[int], tong_doan: int) -> List[Tuple[int, List[int]]]:
+    """
+    Returns the index (1-index) of starting element along with the list of subsequences
+    whose sum of subsequence elements equals the given total
+    """
+    cac_doan_con = []
+    for i, element in enumerate(day_so):
+        if element > tong_doan:
+            continue
+        j = i + 1
+        while j < len(day_so) and sum(day_so[i:j]) < tong_doan:
+            j += 1
+        if sum(day_so[i:j]) == tong_doan:
+            cac_doan_con.append((i + 1, day_so[i:j]))
+    return cac_doan_con
+
+
+def tim_doan_ngan_nhat(
+    cac_doan_con: List[Tuple[int, List[int]]]
+) -> Tuple[int, List[int]]:
+    """
+    Returns the tuple of the index of starting element along with
+    the list of the shortest subsequence
+    """
+    if not cac_doan_con:
+        return 0, 0
+    chi_so, doan_ngan_nhat = cac_doan_con[0]
+    for idx, doan_con in cac_doan_con:
+        if len(doan_con) < len(doan_ngan_nhat):
+            chi_so = idx
+            doan_ngan_nhat = doan_con
+    return chi_so, doan_ngan_nhat
+
+
+def ghi_file(filename: str, *args: Tuple[int, ...]):
+    """
+    Writes the result into file
+    """
+    with open(filename, "w", encoding="utf-8") as file_pointer:
+        file_pointer.write(" ".join(map(str, args)))
+    print(f"The result is written to file {filename}")
+
+
+def main():
+    """
+    Main function
+    """
+    tong_doan, day_so = doc_file("data/tdoan.inp")
+    cac_doan_con = tim_doan(day_so, tong_doan)
+    chi_so, doan_ngan_nhat = tim_doan_ngan_nhat(cac_doan_con)
+    if chi_so == 0:
+        ghi_file("data/tdoan.out", chi_so)
+        return
+    ghi_file("data/tdoan.out", chi_so, len(doan_ngan_nhat))
+
+
+if __name__ == "__main__":
+    main()
