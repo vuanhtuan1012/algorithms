@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-07 05:59:15
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-07 06:27:46
+# @Last Modified time: 2025-02-07 23:53:40
 """
 Chia mảng
 
@@ -52,7 +52,7 @@ def tim_index(day_so: List[int]) -> int:
 
     tong //= 2
     i = 0
-    while sum(day_so[:i]) < tong:
+    while i < len(day_so) and sum(day_so[:i]) < tong:
         i += 1
     if sum(day_so[:i]) == tong:
         return i
