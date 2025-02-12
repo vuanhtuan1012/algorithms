@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-10 23:00:35
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-12 15:49:04
+# @Last Modified time: 2025-02-12 15:52:20
 
 """
 Cho số nguyên dương n.
@@ -87,6 +87,16 @@ def create_spiral_matrix(number: int) -> Matrix:
     return matrix
 
 
+def print_matrix(matrix: Matrix):
+    """
+    Prints the given matrix
+    """
+    size = len(matrix)
+    length = len(str(size**2))
+    for row in range(size):
+        print(" ".join(map(lambda ele: str(ele).ljust(length), matrix[row])))
+
+
 def dry_tests():
     """
     Dry tests
@@ -118,6 +128,8 @@ def dry_tests():
 
     for i, (number, ground_truth) in enumerate(test_cases, start=1):
         result = create_spiral_matrix(number)
+        print(f"Test case {i}: number = {number}, result:")
+        print_matrix(result)
         print(f"Test case {i}: {result == ground_truth}")
 
 
