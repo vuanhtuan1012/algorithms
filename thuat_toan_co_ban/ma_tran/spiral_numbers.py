@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-10 23:00:35
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-12 15:23:47
+# @Last Modified time: 2025-02-12 15:49:04
 
 """
 Cho số nguyên dương n.
@@ -85,3 +85,41 @@ def create_spiral_matrix(number: int) -> Matrix:
         lower_idx += 1
         upper_idx -= 1
     return matrix
+
+
+def dry_tests():
+    """
+    Dry tests
+    """
+    test_cases = [
+        (3, [[1, 2, 3], [8, 9, 4], [7, 6, 5]]),
+        (
+            5,
+            [
+                [1, 2, 3, 4, 5],
+                [16, 17, 18, 19, 6],
+                [15, 24, 25, 20, 7],
+                [14, 23, 22, 21, 8],
+                [13, 12, 11, 10, 9],
+            ],
+        ),
+        (
+            6,
+            [
+                [1, 2, 3, 4, 5, 6],
+                [20, 21, 22, 23, 24, 7],
+                [19, 32, 33, 34, 25, 8],
+                [18, 31, 36, 35, 26, 9],
+                [17, 30, 29, 28, 27, 10],
+                [16, 15, 14, 13, 12, 11],
+            ],
+        ),
+    ]
+
+    for i, (number, ground_truth) in enumerate(test_cases, start=1):
+        result = create_spiral_matrix(number)
+        print(f"Test case {i}: {result == ground_truth}")
+
+
+if __name__ == "__main__":
+    dry_tests()
