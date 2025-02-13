@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-09 23:54:26
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-13 20:21:16
+# @Last Modified time: 2025-02-13 20:29:28
 
 """
 Trong thế giới cờ vua, con tượng không thích con tượng khác.
@@ -82,3 +82,23 @@ def move_bishops(first_bishop: str, second_bishop: str) -> Tuple[str, str]:
     second_bishop = move_bishop(second_bishop, -x_delta, -y_delta)
 
     return first_bishop, second_bishop
+
+
+def dry_tests():
+    """
+    Dry tests
+    """
+    test_cases = [
+        ("d7", "f5", ("c8", "h3")),
+        ("d8", "b5", ("b5", "d8")),
+        ("a1", "h8", ("a1", "h8")),
+    ]
+    for i, (first_bishop, second_bishop, ground_truth) in enumerate(
+        test_cases, start=1
+    ):
+        result = move_bishops(first_bishop, second_bishop)
+        print(f"Test case {i}: {result == ground_truth}")
+
+
+if __name__ == "__main__":
+    dry_tests()
