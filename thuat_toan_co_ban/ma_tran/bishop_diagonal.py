@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-09 23:54:26
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-09 23:58:37
+# @Last Modified time: 2025-02-13 20:09:31
 
 """
 Trong thế giới cờ vua, con tượng không thích con tượng khác.
@@ -11,7 +11,7 @@ chúng lập tức di chuyển tới hai đầu của đường chéo đó.
 
 Cho vị trí ban đầu của hai con tượng trên bàn cờ vua.
 Hãy tính toán vị trí của chúng sau khi di chuyển tới hai đầu của đường chéo
-mà chúng đang đứng.
+mà chúng đang đứng. Kết quả trả về luôn xếp theo thứ tự alphabeta.
 Nhớ rằng con tượng sẽ không di chuyển
 trừ khi chúng đứng chung trên một đường chéo.
 
