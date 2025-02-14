@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-02-09 23:54:26
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-02-13 20:29:28
+# @Last Modified time: 2025-02-14 23:43:40
 
 """
 Trong thế giới cờ vua, con tượng không thích con tượng khác.
@@ -94,7 +94,7 @@ def dry_tests():
         ("a1", "h8", ("a1", "h8")),
     ]
     for i, (first_bishop, second_bishop, ground_truth) in enumerate(
-        test_cases, start=1
+        test_cases, start=0
     ):
         result = move_bishops(first_bishop, second_bishop)
         print(f"Test case {i}: {result == ground_truth}")
