@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-03-09 07:44:28
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-03-09 09:07:38
+# @Last Modified time: 2025-03-09 10:08:36
 
 """
 Bài 3. Lì xì đầu năm
@@ -37,7 +37,7 @@ def tim_li_xi(lucky_numbers: Tuple[int, int]) -> int:
             k -= 1
         stack.append(digit)
     if k > 0:
-        stack = stack[: len(stack) - k]
+        stack = stack[:-k]
     return int("".join(stack)) if stack else -1
 
 
@@ -47,7 +47,7 @@ def ghi_file(filename: str, li_xi: int):
     """
     with open(filename, "w", encoding="utf-8") as file_pointer:
         file_pointer.write(str(li_xi))
-    print(f"Write to file {filename}")
+    print(f"Write to file: {filename}")
 
 
 def main():
