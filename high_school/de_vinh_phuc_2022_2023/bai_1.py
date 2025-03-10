@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-03-10 18:55:38
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-03-10 19:50:51
+# @Last Modified time: 2025-03-10 23:56:17
 
 """
 Bài 1. Trò chơi
@@ -40,7 +40,9 @@ def doc_file(filename: str) -> List[Tuple[int, int, int, int]]:
 
 def find_winner(a: int, b: int, c: int, d: int) -> str:
     """
-    Returns "Tam" if
+    Returns "Tam" if If there exists a number in the interval a, b
+    such that its sum with every number in the interval c, d isn't a prime number.
+    Otherwise, "Cam"
     """
     for i in range(a, b + 1):
         found_prime = False
