@@ -2,26 +2,12 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-03-10 18:55:38
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-03-10 23:56:17
+# @Last Modified time: 2025-03-11 16:41:11
 
 """
 Bài 1. Trò chơi
 """
-
-
 from typing import List, Tuple
-
-
-def is_prime(number: int) -> bool:
-    """
-    Returns True if number is prime, otherwise False
-    """
-    if number < 2:
-        return False
-    for i in range(2, int(number**0.5) + 1):
-        if number % i == 0:
-            return False
-    return True
 
 
 def doc_file(filename: str) -> List[Tuple[int, int, int, int]]:
@@ -36,6 +22,27 @@ def doc_file(filename: str) -> List[Tuple[int, int, int, int]]:
             numbers = tuple(map(int, line.strip().split()))
             games.append(numbers)
     return games
+
+
+def ghi_file(filename: str, winners: List[str]):
+    """
+    Write winners into file
+    """
+    with open(filename, "w", encoding="utf-8") as file_pointer:
+        file_pointer.write("\n".join(winners))
+    print(f"Data is written to file {filename}")
+
+
+def is_prime(number: int) -> bool:
+    """
+    Returns True if number is prime, otherwise False
+    """
+    if number < 2:
+        return False
+    for i in range(2, int(number**0.5) + 1):
+        if number % i == 0:
+            return False
+    return True
 
 
 def find_winner(a: int, b: int, c: int, d: int) -> str:
@@ -55,7 +62,17 @@ def find_winner(a: int, b: int, c: int, d: int) -> str:
     return "Cam"
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Main function
+    """
     games = doc_file("data/game.inp")
+    winners = []
     for numbers in games:
-        print(find_winner(*numbers))
+        winner = find_winner(*numbers)
+        winners.append(winner)
+    ghi_file("data/game.out", winners)
+
+
+if __name__ == "__main__":
+    main()
