@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-03-11 16:51:14
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-03-11 21:49:51
+# @Last Modified time: 2025-03-14 14:33:20
 """
 Bài 2. Hoa giấy
 """
@@ -21,6 +21,8 @@ def tim_so_chau_hoa_nhieu_nhat(ds_chau_hoa: str) -> int:
     """
     Returns the length of the longest substring in which any 3 consecutive
     characters in the substring are different.
+
+    NOT work in case WWWRRRTTT
     """
     if len(ds_chau_hoa) < 3:
         return len(ds_chau_hoa)
