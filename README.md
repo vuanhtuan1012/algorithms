@@ -15,9 +15,11 @@
 
 - A **dynamic array** is a data structure that behaves **like a regular array** (*static array, fixed size*) but with one key superpower: it can **automatically resize** itself when it runs out of space.
 - For example, `list` in Python, `vector` in C++, `ArrayList` in Java are dynamic arrays.
+
 - **Key features:**
   - **Resizable:** the size of a dynamic array increases (and sometimes decreases) as needed.
   - **Contiguous memory:** elements are stored next to each other in memory, so we still get **fast random access** (`O(1)` time to *access an element by index*).
+
 - **How it works:**
   - When created, a dynamic array allocates a temporary array with an intial size (*say capacity = 1, for example*).
   - When we add elements beyond the current capacity:
@@ -25,6 +27,7 @@
     - the old elements are copied into the new array.
     - the old array is freed from memory.
   - When elements are removed, the array may shrink to save memory (*depending on the language and implementation*).
+
 - **Complexity:**
 
   | Operation          | Time Complexity |
@@ -34,6 +37,8 @@
   | Insert *in middle* | `O(n)`          |
   | Delete at end      | `O(1)`          |
   | Delete *in middle* | `O(n)`          |
+
+- **Implementation:**
 
 
 ### Stakc Memory vs. Heap Memory
