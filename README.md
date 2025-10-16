@@ -28,7 +28,7 @@
 - **How it works:**
   - When created, a dynamic array allocates a temporary array with an intial size (say $capacity = 1$, for example).
   - When we add elements beyond the current capacity:
-    - a new larger array is created, *often **double** the previous size* (say $growth\_ factor = 2$, for example).
+    - a new larger array is created, *often **double** the previous size* (say $growth\_factor = 2$, for example).
     - the old elements are copied into the new array.
     - the old array is freed from memory.
   - When elements are removed, the array may shrink to save memory (*depending on the language and implementation*).
