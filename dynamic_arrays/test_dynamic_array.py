@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-10-12 18:31:07
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-10-14 09:50:45
+# @Last Modified time: 2025-10-16 15:20:16
 """
 Test Dynamic Array class
 """
@@ -31,6 +31,7 @@ def test_array_initialization():
     assert arr.capacity == 1
     assert arr.growth_factor == 2
     assert str(arr) == "[]"
+    assert repr(arr) == "DynamicArray(_no_items=0, _capacity=1, _array=[])"
 
 
 @pytest.mark.parametrize("items", [(2, "foo"), ("bar", 5, 7)])
