@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-10-11 18:05:40
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-10-14 00:13:08
+# @Last Modified time: 2025-10-16 15:22:21
 """
 Dynamic Array
 """
@@ -45,7 +45,10 @@ class DynamicArray:
         return f"[{str_items}]"
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({str(self)})"
+        return (
+            f"{self.__class__.__name__}(_no_items={len(self)}, "
+            f"_capacity={self.capacity}, _array={str(self)})"
+        )
 
     def __iter__(self) -> Generator[Any, None, None]:
         for i in range(len(self)):
@@ -120,6 +123,9 @@ class DynamicArray:
         return len(self) + index if index < 0 else index
 
     def _validate_index(self, index: int):
+        """
+        Raises `IndexError` if the index is out of range. Negative indices are not supported.
+        """
         if index < 0 or index >= len(self):
             raise IndexError("index out of range")
 
@@ -127,8 +133,7 @@ class DynamicArray:
         """
         Shrinks the array when necessary.
         """
-        shrink_factor = 1 / (self.growth_factor**2)
-        if 0 < len(self) <= int(self.capacity * shrink_factor):
+        if 0 < len(self) * self.growth_factor**2 <= self.capacity:
             capacity = max(1, self.capacity // self.growth_factor)
             self._resize(capacity)
 
