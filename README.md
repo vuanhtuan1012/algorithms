@@ -71,10 +71,10 @@ The `DynamicArray` class includes the attributes and methods listed below.
   - `insert`: Inserts an item to the index provided.
     - If the index is less than `0`, the item will be inserted at the first position.
     - If the index is greater than the length of the array, the item will be inserted at the last position.
-  - `remove`: Removes the first occurrence of the value. Raises `ValueError` if the value is not present.
+  - `remove`: Removes the first occurrence of the value provided. Raises `ValueError` if the value is not present.
   - `pop`: Deletes and returns the item at the specified index (last by default). Supports negative indexing and raises `IndexError` if the index is out of range.
   - `clear`: Removes all items from the array.
-  - `find`: Finds the index of the first occurrence of the value, returning -1 if it's not present.
+  - `find`: Finds the index of the first occurrence of the value, returning `-1` if it's not present.
 - **Protected methods:**
   - `_make_array`: Creates and returns an array with the given size.
   - `_resize`: Expands or shrinks the array based on the provided `capacity` value.
