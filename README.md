@@ -95,10 +95,52 @@ The `DynamicArray` class includes the attributes and methods listed below.
   - **Interfacing with C/C++ libraries**: use native libraries without wrappers.
   - **Access OS-level APIs**: for example Windows or Unix shared objects.
 
-
 ## Stack Memory vs. Heap Memory
 
-:running: TODO
+The **stack** stores *function context* and *variable references*, while the **heap** stores *actual objects* and *data that persist beyond a function call*.
+
+| Feature           | Stack                   | Heap                   |
+|-------------------|-------------------------|------------------------|
+| Purpose           | Store *temporary data* (function calls, local variables) | Store *dynamic data* (objects, arrays, data that changes size) |
+| Managed by        | The compiler/runtime automatically                     | The programmer or garbage collector                |
+| Memory allocation | Fixed-size, fast (**LIFO order**)                      | Flexible                                           |
+| Lifetime          | Exists only while the function is running              | Exists until explecitly freed or garbage collected |
+| Speed             | Very fast                                              | Slow due to manual management                      |
+| Size limit        | Small, can overflow                                    | Large, only limited by system memory               |
+
+*For example*, consider a function that assigns a local variable to a list:
+- When the function is called, the *local variable name* is stored in the **stack frame**, while the *actual list object* is allocated in the **heap**.
+- Once the function terminates, the **stack frame is destroyed**, and the *variable name* inside the function disappears. However, the *list object* remains in the **heap**, now without any references pointing to it. At this point, it becomes **eligible for garbage collection**.
+- When the garbage collector runs, it will detect the unreferenced list and free the associated memory.
+
+```python
+def memo():
+  x = [1, 2, 3]
+memo()
+```
+
+**In Python**, all objects (`int`, `str`, `list`, `dict`, `class`, etc.) are **heap-allocated** (live on the heap). The **stack** only keeps *references* to those heap objects and manages *function calls*.
+
+What actually happens when we write `x = 10` ?
+- Python checks whether an integer object representing `10` already exists.
+- **If yes**, it reuse it. **If not**, it creates a new on on the **heap**.
+- The variable name `x` (lives on the **stack**) simply **points to** that object on the heap.
+
+```python
+x = 10
+y = 10
+print(x is y)  # True
+```
+
+**Useful functions:**
+- `id`: returns the unique identity of an object, which in CPython, is its memory address in the **heap**.
+
+  It can be used to check whether different variable names point to the same object, or to explore object mutability and identity-related behavior.
+- `sys.getrefcount`: returns the number of references that currently held to an object. **Note that** calling this function **temporarily adds one reference** to the object (as its argument), so the returned count is **one higher** than the actual number.
+
+  Every object in CPython has a reference counter, the count of how many variables, containers, or temporary expressions refer to it.
+
+  When this count drops to **zero**, the garbage collector frees the object from the heap.
 
 ## Hash Usage
 
