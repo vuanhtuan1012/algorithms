@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-10-12 18:31:07
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-10-16 15:20:16
+# @Last Modified time: 2025-10-17 12:47:09
 """
 Test Dynamic Array class
 """
@@ -34,16 +34,17 @@ def test_array_initialization():
     assert repr(arr) == "DynamicArray(_no_items=0, _capacity=1, _array=[])"
 
 
-@pytest.mark.parametrize("items", [(2, "foo"), ("bar", 5, 7)])
-def test_append_items_to_array(items):
+def test_init_with_sequence():
     """
-    Verifies appending items to an array.
+    Verifies initialization with a sequence
     """
-    arr = DynamicArray()
-    for item in items:
-        arr.append(item)
-    assert len(arr) == len(items)
-    assert str(arr) == f"[{', '.join(str(item) for item in items)}]"
+    arr = DynamicArray(range(2))
+    assert str(arr) == "[0, 1]"
+    assert arr.capacity == 2
+
+    arr = DynamicArray([1, 2.2, "foo"])
+    assert str(arr) == "[1, 2.2, foo]"
+    assert arr.capacity == 4
 
 
 @pytest.mark.parametrize("growth_factor", [3, 5])
@@ -59,7 +60,7 @@ def test_array_growth_factor_logic(growth_factor):
     assert arr.capacity == growth_factor**2
 
 
-def test_get_element_by_index(sample_array):
+def test_get_element_by_index(sample_array: DynamicArray):
     """
     Checks retrieval of an element by index.
     """
@@ -74,7 +75,7 @@ def test_get_element_by_index(sample_array):
         _ = arr[3]
 
 
-def test_set_element_at_index(sample_array):
+def test_set_element_at_index(sample_array: DynamicArray):
     """
     Checks assignment of an element at a specific index.
     """
@@ -91,24 +92,7 @@ def test_set_element_at_index(sample_array):
         arr[3] = ""
 
 
-def test_insert_element_at_index(sample_array):
-    """
-    Checks insertion of an element at a specific index.
-    """
-    arr = sample_array
-    assert str(arr) == "[1, 2.2, foo]"
-
-    arr.insert(1, 3.3)
-    assert str(arr) == "[1, 3.3, 2.2, foo]"
-
-    arr.insert(10, "bar")
-    assert str(arr) == "[1, 3.3, 2.2, foo, bar]"
-
-    arr.insert(-10, "baz")
-    assert str(arr) == "[baz, 1, 3.3, 2.2, foo, bar]"
-
-
-def test_delete_element_at_index(sample_array):
+def test_delete_element_at_index(sample_array: DynamicArray):
     """
     Checks deletion of an element at a specific index.
     """
@@ -128,7 +112,36 @@ def test_delete_element_at_index(sample_array):
         del arr[2]
 
 
-def test_remove_first_occurrence(sample_array):
+@pytest.mark.parametrize("items", [(2, "foo"), ("bar", 5, 7)])
+def test_append_items_to_array(items: tuple):
+    """
+    Verifies appending items to an array.
+    """
+    arr = DynamicArray()
+    for item in items:
+        arr.append(item)
+    assert len(arr) == len(items)
+    assert str(arr) == f"[{', '.join(str(item) for item in items)}]"
+
+
+def test_insert_element_at_index(sample_array: DynamicArray):
+    """
+    Checks insertion of an element at a specific index.
+    """
+    arr = sample_array
+    assert str(arr) == "[1, 2.2, foo]"
+
+    arr.insert(1, 3.3)
+    assert str(arr) == "[1, 3.3, 2.2, foo]"
+
+    arr.insert(10, "bar")
+    assert str(arr) == "[1, 3.3, 2.2, foo, bar]"
+
+    arr.insert(-10, "baz")
+    assert str(arr) == "[baz, 1, 3.3, 2.2, foo, bar]"
+
+
+def test_remove_first_occurrence(sample_array: DynamicArray):
     """
     Checks removal of the first occurrence of a value.
     """
@@ -145,7 +158,7 @@ def test_remove_first_occurrence(sample_array):
         arr.remove("bar")
 
 
-def test_pop_at_index(sample_array):
+def test_pop_at_index(sample_array: DynamicArray):
     """
     Checks popping an element at a specific index.
     """
@@ -168,7 +181,7 @@ def test_pop_at_index(sample_array):
     assert str(arr) == "[]"
 
 
-def test_clear_array(sample_array):
+def test_clear_array(sample_array: DynamicArray):
     """
     Checks the removal of all elements from the array.
     """
@@ -182,7 +195,7 @@ def test_clear_array(sample_array):
     assert arr.capacity == 1
 
 
-def test_find_first_occurrence(sample_array):
+def test_find_first_occurrence(sample_array: DynamicArray):
     """
     Verifies finding the first occurrence of an item in the array.
     """
@@ -197,16 +210,3 @@ def test_find_first_occurrence(sample_array):
 
     index = arr.find("bar")
     assert index == -1
-
-
-def test_init_with_sequence():
-    """
-    Verifies initialization with a sequence
-    """
-    arr = DynamicArray(range(2))
-    assert str(arr) == "[0, 1]"
-    assert arr.capacity == 2
-
-    arr = DynamicArray([1, 2.2, "foo"])
-    assert str(arr) == "[1, 2.2, foo]"
-    assert arr.capacity == 4
