@@ -1,21 +1,19 @@
 # Algorithms  <!-- omit in toc -->
 
-- [Arrays \& Hashing](#arrays--hashing)
-  - [Dynamic Arrays](#dynamic-arrays)
-    - [Definition](#definition)
-    - [Implementation](#implementation)
-  - [Stack Memory vs. Heap Memory](#stack-memory-vs-heap-memory)
-  - [Hash Usage](#hash-usage)
-  - [Hash Implementation](#hash-implementation)
-  - [Prefix Sums](#prefix-sums)
+- [Dynamic Arrays](#dynamic-arrays)
+  - [Definition](#definition)
+  - [Implementation](#implementation)
+- [ctypes](#ctypes)
+- [Stack Memory vs. Heap Memory](#stack-memory-vs-heap-memory)
+- [Hash Usage](#hash-usage)
+- [Hash Implementation](#hash-implementation)
+- [Prefix Sums](#prefix-sums)
 - [Reference](#reference)
 
 
-## Arrays & Hashing
+## Dynamic Arrays
 
-### Dynamic Arrays
-
-#### Definition
+### Definition
 
 - A **dynamic array** is a data structure that behaves **like a regular array** (*static array, fixed size*) but with one key superpower: it can **automatically resize** itself when it runs out of space.
 
@@ -47,7 +45,7 @@
   | Delete at end      | `O(1)`          |
   | Delete *in middle* | `O(n)`          |
 
-#### Implementation
+### Implementation
 
 The `DynamicArray` class includes the attributes and methods listed below.
 
@@ -76,7 +74,7 @@ The `DynamicArray` class includes the attributes and methods listed below.
   - `clear`: Removes all items from the array.
   - `find`: Finds the index of the first occurrence of the value, returning `-1` if it's not present.
 - **Protected methods:**
-  - `_make_array`: Creates and returns an array with the given size.
+  - `_make_array`: Creates and returns an array (fixed-size, contiguous memory block) of the given capacity using `ctypes.py_object`.
   - `_resize`: Expands or shrinks the array based on the provided `capacity` value.
   - `_normalize_index`: Returns a non-negative index representing the same position.
   - `_validate_index`: Raises `IndexError` if the index is out of range. Negative indices are not supported.
@@ -84,20 +82,33 @@ The `DynamicArray` class includes the attributes and methods listed below.
 - **Other methods:**
   - `__repr__`: Provides a string representation of the array intended for debugging and development purposes.
 
+## ctypes
 
-### Stack Memory vs. Heap Memory
+- `ctypes` is a powerful **built-in library** that let us work directly with **low-level C data types** and **shared libraries** (`.dll`, `.so`, `.dylib`).
+- `ctypes` allows Python code to:
+  - **Call C functions**: load shared C libraries and call their function directly from Python.
+  - **Use C data types**: create and manipulate low-level data like C `int`, `char`, `double`, `struct`, etc.
+  - **Interface with system-level APIs**: useful for interacting with OS libraries or performance-critical native code.
+- `ctypes` is useful for:
+  - **Preformance**: call optimized C functions directly instead of using pure Python loops.
+  - **Low-level memory control**: create dynamic arrays, buffers, or structs.
+  - **Interfacing with C/C++ libraries**: use native libraries without wrappers.
+  - **Access OS-level APIs**: for example Windows or Unix shared objects.
+
+
+## Stack Memory vs. Heap Memory
 
 :running: TODO
 
-### Hash Usage
+## Hash Usage
 
 :walking: TODO
 
-### Hash Implementation
+## Hash Implementation
 
 :walking: TODO
 
-### Prefix Sums
+## Prefix Sums
 
 :walking: TODO
 
