@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-10-11 18:05:40
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-10-16 15:22:21
+# @Last Modified time: 2025-10-17 12:19:33
 """
 Dynamic Array
 """
@@ -99,9 +99,12 @@ class DynamicArray:
         """
         Returns an array with the size provided.
         """
-        # Create an array with a specified capacity, where each item is a Python object
-        array_type = capacity * ctypes.py_object
-        return array_type()
+        # Define an an array type with a specified capacity,
+        # where each item is a Python object
+        ArrayType = capacity * ctypes.py_object  # pylint: disable=invalid-name
+
+        # Allocate memory and return an instance of the defined type
+        return ArrayType()
 
     def _resize(self, capacity: int):
         """
