@@ -86,14 +86,14 @@ The `DynamicArray` class includes the attributes and methods listed below.
 
 - `ctypes` is a powerful **built-in library** that let us work directly with **low-level C data types** and **shared libraries** (`.dll`, `.so`, `.dylib`).
 - `ctypes` allows Python code to:
-  - **Call C functions**: load shared C libraries and call their function directly from Python.
-  - **Use C data types**: create and manipulate low-level data like C `int`, `char`, `double`, `struct`, etc.
-  - **Interface with system-level APIs**: useful for interacting with OS libraries or performance-critical native code.
+  - **Call C functions:** load shared C libraries and call their function directly from Python.
+  - **Use C data types:** create and manipulate low-level data like C `int`, `char`, `double`, `struct`, etc.
+  - **Interface with system-level APIs:** useful for interacting with OS libraries or performance-critical native code.
 - `ctypes` is useful for:
-  - **Preformance**: call optimized C functions directly instead of using pure Python loops.
-  - **Low-level memory control**: create dynamic arrays, buffers, or structs.
-  - **Interfacing with C/C++ libraries**: use native libraries without wrappers.
-  - **Access OS-level APIs**: for example Windows or Unix shared objects.
+  - **Preformance:** call optimized C functions directly instead of using pure Python loops.
+  - **Low-level memory control:** create dynamic arrays, buffers, or structs.
+  - **Interfacing with C/C++ libraries:** use native libraries without wrappers.
+  - **Access OS-level APIs:** for example Windows or Unix shared objects.
 
 ## Stack Memory vs. Heap Memory
 
@@ -133,14 +133,20 @@ print(x is y)  # True
 ```
 
 **Useful functions:**
-- `id`: returns the unique identity of an object, which in CPython, is its memory address in the **heap**.
+- `id`: returns **the unique identity** of an object, which in CPython, is its memory address in the **heap**.
 
   It can be used to check whether different variable names point to the same object, or to explore object mutability and identity-related behavior.
-- `sys.getrefcount`: returns the number of references that currently held to an object. **Note that** calling this function **temporarily adds one reference** to the object (as its argument), so the returned count is **one higher** than the actual number.
+- `sys.getrefcount`: returns **the number of references** that currently held to an object. **Note that** calling this function **temporarily adds one reference** to the object (as its argument), so the returned count is **one higher** than the actual number.
 
   Every object in CPython has a reference counter, the count of how many variables, containers, or temporary expressions refer to it.
 
   When this count drops to **zero**, the garbage collector frees the object from the heap.
+
+- `sys.getsizeof`: returns **the size** of an object in bytes, including its metadata on the heap.
+
+  Note that `sys.getsizeof` returns the size of the object itself in bytes, but does **not include** the size of any objects it references.
+
+  *For example*, in Python, a list object is stored on the heap and contains metadata such as capacity and size, along with an array of pointers to its elements. Each pointer refers to a separate object, also stored on the heap. `sys.getsizeof` reports the size of the list structure itself, not the combined size of its elements.
 
 ## Hash Usage
 
