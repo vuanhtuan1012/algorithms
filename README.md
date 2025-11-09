@@ -26,14 +26,14 @@
 - **How it works:**
   - When created, a dynamic array allocates a temporary array with an intial size (say $capacity = 1$, for example).
   - When we add elements beyond the current capacity:
-    - a new larger array is created, *often **double** the previous size* (say $growth\_factor = 2$, for example).
+    - a new larger array is created, *often **double** the previous size* (say $growthFactor = 2$, for example).
     - the old elements are copied into the new array.
     - the old array is freed from memory.
   - When elements are removed, the array may shrink to save memory (*depending on the language and implementation*).
 - **How it shrinks:**
-  - When the number of elements is less than or equals a certain fraction of the capacity, *often **1/4** of the capacity*, the capacity will be reduced. (say $shrink\_factor = 1/4$).
+  - When the number of elements is less than or equals a certain fraction of the capacity, *often **1/4** of the capacity*, the capacity will be reduced. (say $shrinkFactor = 1/4$).
   - The array will be shrunk to half of its current size.
-  - In summary, the shrink factor is defined as $\frac{1}{growth\_factor^2}$. The shrink process is triggered when the number of elements is less than or equal to $capacity * shrink\_factor$. When activated, the array shrinks to a new capacity equal to $\frac{capacity}{growth\_factor}$.
+  - In summary, the shrink factor is defined as $\frac{1}{growthFactor^2}$. The shrink process is triggered when the number of elements is less than or equal to $capacity * shrinkFactor$. When activated, the array shrinks to a new capacity equal to $\frac{capacity}{growthFactor}$.
 
 - **Complexity:**
 
