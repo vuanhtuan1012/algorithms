@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-10-11 18:05:40
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-11-09 16:57:04
+# @Last Modified time: 2025-11-09 17:14:12
 """
 Dynamic Array
 """
@@ -136,8 +136,9 @@ class DynamicArray:
         """
         Shrinks the array when necessary.
         """
-        if 0 < len(self) * self.growth_factor**2 <= self.capacity:
-            capacity = max(1, self.capacity // self.growth_factor)
+        shrink_factor = 1 / self.growth_factor**2
+        if 0 < len(self) <= self.capacity * shrink_factor:
+            capacity = max(1, int(self.capacity * shrink_factor * self.growth_factor))
             self._resize(capacity)
 
     def append(self, item: Any):
