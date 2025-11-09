@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-10-11 18:05:40
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-10-17 12:19:33
+# @Last Modified time: 2025-11-09 16:57:04
 """
 Dynamic Array
 """
@@ -129,7 +129,7 @@ class DynamicArray:
         """
         Raises `IndexError` if the index is out of range. Negative indices are not supported.
         """
-        if index < 0 or index >= len(self):
+        if not 0 <= index < len(self):
             raise IndexError("index out of range")
 
     def _shrink_if_needed(self):

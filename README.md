@@ -31,9 +31,9 @@
     - the old array is freed from memory.
   - When elements are removed, the array may shrink to save memory (*depending on the language and implementation*).
 - **How it shrinks:**
-  - When the number of elements is less than or equals a certain fraction of the capacity, *often **1/4** of the capacity*, the capacity will be reduced. (say $shrinkFactor = 1/4$).
+  - When the number of elements is less than or equals a certain fraction of the capacity, *often $\frac{1}{4}$ of the capacity*, the capacity will be reduced. (say $shrinkFactor = \frac{1}{4}$).
   - The array will be shrunk to half of its current size.
-  - In summary, the shrink factor is defined as $\frac{1}{growthFactor^2}$. The shrink process is triggered when the number of elements is less than or equal to $capacity * shrinkFactor$. When activated, the array shrinks to a new capacity equal to $\frac{capacity}{growthFactor}$.
+  - In summary, the shrink factor is defined by the formula $shrinkFactor = \frac{1}{growthFactor^2}$. The shrink process is triggered when the number of elements is less than or equal to $capacity * shrinkFactor$. When activated, the array shrinks to a new capacity equal to $capacity * shrinkFactor$.
 
 - **Complexity:**
 
