@@ -5,8 +5,9 @@
   - [Implementation](#implementation)
 - [ctypes](#ctypes)
 - [Stack Memory vs. Heap Memory](#stack-memory-vs-heap-memory)
-- [Hash Usage](#hash-usage)
-- [Hash Implementation](#hash-implementation)
+- [Hashing](#hashing)
+  - [Definition](#definition-1)
+  - [Implementation](#implementation-1)
 - [Prefix Sums](#prefix-sums)
 - [Reference](#reference)
 
@@ -148,11 +149,53 @@ print(x is y)  # True
 
   *For example*, in Python, a list object is stored on the heap and contains metadata such as capacity and size, along with an array of pointers to its elements. Each pointer refers to a separate object, also stored on the heap. `sys.getsizeof` reports the size of the list structure itself, not the combined size of its elements.
 
-## Hash Usage
+## Hashing
 
-:walking: TODO
+### Definition
 
-## Hash Implementation
+- Hashing refers to the process of generating a fixed-size output from an input of variable size using **hash functions**. This technique **determines an index** or location for the storage of an item **in a data structure**.
+- Hashing is **ideal for implementing key-value** data structures.
+-  It's **useful for many operations** such as: *searching*, *duplicate detection*, *caching*, *symbol tables*, *sets and maps*, *password verification*, etc. **since** it allows for average-case `O(1)` **time complexity** for insertion, deletion, and lookup.
+- **Components** of hashing:
+  - **key:** can be anything string or integer (more detail, *it need to be immutable*) which is fed as input in the hash function that is to determine an index for storage of an item in a data structure.
+  - **hash function:** receives the input key and **returns the index** of an element in an array called a **hash table**. The index is known as the **hash index**.
+    - A simple hash function uses the **division method**, `index = hash(key) % capacity`. Where:
+      - `hash` is a function to transform a key (*in any hashable data type*) into an integer as a mathematical fingerprint of the key. We can't reverse it to get the original key, but we can compare them quickly.
+      - `capacity` is the capacity of the hash table.
+  - **hash table:** is a data structure that **maps keys to values** using a special function called a *hash function*.
+    - It **stores the data** in an associative maner **in an array** where each data value has its own unique index.
+    - Hash table **capacity** affects collision frequency and performance.
+    - **Strategy** to choose a good table capacity:
+      - **Prime number:** Especially used for division method or open addressing. It helps to distribute keys more uniformly.
+      - **Power of 2:** Commonly used when using bit masking, `index = hash(key) & (capacity - 1)`. Often used in practical implementations like Python, Java.
+      - **Growth strategy:** on rehashing, double the current capacity, or use the next prime number greater than twice its current value. Avoid frequent resizing to reduce overhead.
+- **Collision:** since the hashing process generates a small number for a big key, so there's a possibility that two keys could be hashed to the same index.
+  - It occurs **more frequently** with a **high load factor** and less frequently with a low load factor.
+  - Main techniques to **handle collision:**
+    - **Chaining:** each index stores a linked list, or bucket of entries.
+    - **Open Addressing:** find another open slot (methods: linear probing, quadratic probing, double hashing).
+- **Load factor** measures how full the hash table is.
+  - The load factor **controls performance**:
+    - a low load factor $\rightarrow$ more empty buckets $\rightarrow$ fewer collisions $\rightarrow$ faster lookup.
+    - a high load factor $\rightarrow$ more collision $\rightarrow$ slower performance.
+  - It's a trade-off between speed and memory usage.
+  - Load factor is **calculated** using the following formula:
+  ```math
+  \alpha = \frac{n}{m}
+  ```
+
+  - Where:
+    - $\alpha$: the load factor
+    - $n$: the total number of stored keys (entries).
+    - $m$: the total number of buckets in the hash table.
+  - When the load factor exceeds a **threshold** (commonly **between 0.6 and 0.8**), the hashtable resizes itself (called **rehashing**).
+  - **In practice**, the default load factor of Python `dict` is around $0.66$, of Java `HashMap` is about $0.75$.
+- **Rehasing process:**
+  - Create a new, larger hash table.
+  - Recalculate hash indices for all existing keys.
+  - Insert them into the new table.
+
+### Implementation
 
 :walking: TODO
 
@@ -167,3 +210,5 @@ print(x is y)  # True
 3. Đề [December 21, 2024](high_school/books/DieuChinh_28_De_HSG_Huyen_TinTHCS.pdf).
 4. Đề [December 28, 2024](high_school/books/De_2024_12_28.pdf).
 5. [NeetCode Roadmap](https://neetcode.io/roadmap)
+6. [What is Hashing?](https://www.geeksforgeeks.org/dsa/what-is-hashing/)
+7. [Hash Table Data Structure](https://www.geeksforgeeks.org/dsa/hash-table-data-structure/)
