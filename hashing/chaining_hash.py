@@ -1,0 +1,175 @@
+# -*- coding: utf-8 -*-
+# @Author: VU Anh Tuan
+# @Date:   2025-11-10 15:45:14
+# @Last Modified by:   VU Anh Tuan
+# @Last Modified time: 2025-11-10 20:28:38
+"""
+Chaining Hash
+"""
+from typing import Any, Generator
+from collections.abc import Hashable
+
+
+class ChainingHash:
+    """
+    ChainingHash class
+    """
+
+    def __init__(self) -> None:
+        self._no_items = 0
+        self._capacity = 2
+        self._table = [[] for _ in range(self._capacity)]
+
+    def __len__(self) -> int:
+        return self._no_items
+
+    def __str__(self) -> str:
+        output = ", ".join(
+            f"{key}: {value}" for bucket in self._table for key, value in bucket
+        )
+        return "{" + output + "}"
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(_no_items={self._no_items}, "
+            f"_capacity={self._capacity}, _table={self._table})"
+        )
+
+    def __iter__(self) -> Generator[Any, None, None]:
+        for key, _ in self.items():
+            yield key
+
+    def __getitem__(self, key: Hashable) -> Any:
+        if key not in self:
+            raise KeyError(key)
+        return next(val for k, val in self.items() if k == key)
+
+    def __setitem__(self, key: Hashable, value: Any):
+        self.insert(key, value)
+
+    def __delitem__(self, key: Hashable):
+        idx = self.hash(key)
+        bucket = self._table[idx]
+        try:
+            value = next((val for k, val in bucket if k == key))
+        except StopIteration as exc:
+            raise KeyError(key) from exc
+        bucket.remove((key, value))
+        self._no_items -= 1
+
+    @property
+    def load_factor(self) -> float:
+        """
+        Returns the load factor of the table
+        """
+        return self._no_items / self._capacity
+
+    @property
+    def rehashing_threshold(self) -> float:
+        """
+        Defines the rehashing threshold
+        """
+        return 0.7
+
+    def _is_prime(self, number: int) -> bool:
+        """
+        Determines whether the given number is prime. Returns True if it is, False otherwise
+        """
+        if number < 2:
+            return False
+
+        for i in range(2, int(number**0.5) + 1):
+            if number % i == 0:
+                return False
+        return True
+
+    def _update_capacity(self):
+        """
+        Updates the capacity to the next prime number greater than twice its current value
+        """
+        capacity = self._capacity * 2
+        while not self._is_prime(capacity):
+            capacity += 1
+        self._capacity = capacity
+
+    def _rehash(self):
+        """
+        Rehashes the current object
+        """
+        self._update_capacity()
+        # extend the table
+        table = [[] for _ in range(self._capacity)]
+        for key, value in self.items():
+            idx = self.hash(key)
+            table[idx].append((key, value))
+        self._table = table
+
+    def hash(self, key: Hashable) -> int:
+        """
+        Returns hashed key
+        """
+        return hash(key) % self._capacity
+
+    def insert(self, key: Hashable, value: Any):
+        """
+        Inserts a pair of key value to the table
+
+        If the provided key already presents in the table, overwrite the current value
+        """
+        idx = self.hash(key)
+        bucket = self._table[idx]
+
+        # looking for the provided key in the bucket
+        bucket_idx = next((i for i, (k, _) in enumerate(bucket) if k == key), -1)
+        if bucket_idx < 0:  # not present
+            bucket.append((key, value))
+            self._no_items += 1
+        else:  # present => overwrite the current value
+            bucket[bucket_idx] = (key, value)
+
+        # rehashing if needed
+        if self.load_factor >= self.rehashing_threshold:
+            self._rehash()
+
+    def get(self, key: Hashable, default: Any = None) -> Any:
+        """
+        Returns the value of the provided key
+
+        If the key doesn't present in the table, the default value is returned
+        """
+        idx = self.hash(key)
+        bucket = self._table[idx]
+        return next((value for k, value in bucket if k == key), default)
+
+    def items(self) -> list[tuple[Hashable, Any]]:
+        """
+        Returns the list of items in the table
+        """
+        return [(key, value) for bucket in self._table for key, value in bucket]
+
+
+def dry_run():
+    """
+    Performs a dry run
+    """
+    chaining_hash = ChainingHash()
+    print(chaining_hash)
+    print(repr(chaining_hash))
+
+    chaining_hash.insert("foo", 4)
+    chaining_hash.insert("bar", 3)
+    print(chaining_hash)
+    print(repr(chaining_hash))
+
+    print(chaining_hash.get("foo"))
+    print(chaining_hash.get("bar", default=5))
+    print(chaining_hash.get("baz", default=5))
+
+    chaining_hash.insert("bar", 5)
+    print(chaining_hash)
+    del chaining_hash["baz"]
+
+
+if __name__ == "__main__":
+    dry_run()
+    # chaining_hash = ChainingHash()
