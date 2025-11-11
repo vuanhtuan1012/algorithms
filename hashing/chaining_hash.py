@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-11-10 15:45:14
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-11-10 20:28:38
+# @Last Modified time: 2025-11-11 12:42:58
 """
 Chaining Hash
 """
@@ -24,10 +24,10 @@ class ChainingHash:
         return self._no_items
 
     def __str__(self) -> str:
-        output = ", ".join(
+        representation = ", ".join(
             f"{key}: {value}" for bucket in self._table for key, value in bucket
         )
-        return "{" + output + "}"
+        return f"{{{representation}}}"
 
     def __repr__(self) -> str:
         return (
@@ -50,11 +50,13 @@ class ChainingHash:
     def __delitem__(self, key: Hashable):
         idx = self.hash(key)
         bucket = self._table[idx]
+
         try:
-            value = next((val for k, val in bucket if k == key))
+            bucket_idx = next((idx for idx, (k, _) in enumerate(bucket) if k == key))
         except StopIteration as exc:
             raise KeyError(key) from exc
-        bucket.remove((key, value))
+
+        del bucket[bucket_idx]
         self._no_items -= 1
 
     @property
@@ -92,10 +94,14 @@ class ChainingHash:
             capacity += 1
         self._capacity = capacity
 
-    def _rehash(self):
+    def _rehash_if_needed(self):
         """
-        Rehashes the current object
+        Rehashes the current object when necessary
         """
+        # check pre-condition
+        if self.load_factor < self.rehashing_threshold:
+            return
+
         self._update_capacity()
         # extend the table
         table = [[] for _ in range(self._capacity)]
@@ -119,17 +125,16 @@ class ChainingHash:
         idx = self.hash(key)
         bucket = self._table[idx]
 
-        # looking for the provided key in the bucket
+        # looking for the index of the provided key in the bucket
         bucket_idx = next((i for i, (k, _) in enumerate(bucket) if k == key), -1)
-        if bucket_idx < 0:  # not present
-            bucket.append((key, value))
-            self._no_items += 1
-        else:  # present => overwrite the current value
+        if bucket_idx >= 0:  # present: overwrite the current item
             bucket[bucket_idx] = (key, value)
+            return
 
-        # rehashing if needed
-        if self.load_factor >= self.rehashing_threshold:
-            self._rehash()
+        # not present: add new item
+        bucket.append((key, value))
+        self._no_items += 1
+        self._rehash_if_needed()
 
     def get(self, key: Hashable, default: Any = None) -> Any:
         """
@@ -167,7 +172,8 @@ def dry_run():
 
     chaining_hash.insert("bar", 5)
     print(chaining_hash)
-    del chaining_hash["baz"]
+    del chaining_hash["bar"]
+    print(len(chaining_hash))
 
 
 if __name__ == "__main__":
