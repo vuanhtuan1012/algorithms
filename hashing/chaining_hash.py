@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-11-10 15:45:14
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-11-12 10:38:32
+# @Last Modified time: 2025-11-12 10:44:10
 """
 Chaining Hash
 """
@@ -158,31 +158,3 @@ class ChainingHash:
         Returns the list of items in the table
         """
         return [(key, value) for bucket in self._table for key, value in bucket]
-
-
-def dry_run():
-    """
-    Performs a dry run
-    """
-    chaining_hash = ChainingHash()
-    print(chaining_hash)
-    print(repr(chaining_hash))
-
-    chaining_hash.insert("foo", 4)
-    chaining_hash.insert("bar", 3)
-    print(chaining_hash)
-    print(repr(chaining_hash))
-
-    print(chaining_hash.get("foo"))
-    print(chaining_hash.get("bar", default=5))
-    print(chaining_hash.get("baz", default=5))
-
-    chaining_hash.insert("bar", 5)
-    print(chaining_hash)
-    del chaining_hash["bar"]
-    print(len(chaining_hash))
-
-
-if __name__ == "__main__":
-    dry_run()
-    # chaining_hash = ChainingHash()
