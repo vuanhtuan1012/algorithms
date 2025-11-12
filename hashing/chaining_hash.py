@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-11-10 15:45:14
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-11-11 12:42:58
+# @Last Modified time: 2025-11-12 10:38:32
 """
 Chaining Hash
 """
@@ -58,6 +58,13 @@ class ChainingHash:
 
         del bucket[bucket_idx]
         self._no_items -= 1
+
+    @property
+    def capacity(self) -> int:
+        """
+        Returns the capacity of the table
+        """
+        return self._capacity
 
     @property
     def load_factor(self) -> float:
