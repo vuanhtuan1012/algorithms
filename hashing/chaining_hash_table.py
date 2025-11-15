@@ -2,17 +2,17 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-11-10 15:45:14
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-11-12 10:44:10
+# @Last Modified time: 2025-11-15 09:53:36
 """
-Chaining Hash
+Chaining Hash Table
 """
 from typing import Any, Generator
 from collections.abc import Hashable
 
 
-class ChainingHash:
+class ChainingHashTable:
     """
-    ChainingHash class
+    ChainingHashTable class
     """
 
     def __init__(self) -> None:
@@ -157,4 +157,4 @@ class ChainingHash:
         """
         Returns the list of items in the table
         """
-        return [(key, value) for bucket in self._table for key, value in bucket]
+        return [item for bucket in self._table for item in bucket]

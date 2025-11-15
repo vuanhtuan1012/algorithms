@@ -2,83 +2,83 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-11-12 09:43:28
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-11-12 10:42:40
+# @Last Modified time: 2025-11-15 09:56:44
 """
-Test ChainingHash class
+Test ChainingHashTable class
 """
 import pytest
 
-from chaining_hash import ChainingHash
+from chaining_hash_table import ChainingHashTable
 
 
 def test_initialization():
     """
     Verifies initialization of a chaining hash
     """
-    ch = ChainingHash()
-    assert len(ch) == 0
-    assert str(ch) == "{}"
+    ht = ChainingHashTable()
+    assert len(ht) == 0
+    assert str(ht) == "{}"
 
 
 def test_insertion():
     """
     Verifies the insertion of an element
     """
-    ch = ChainingHash()
+    ht = ChainingHashTable()
 
     # insert an item whose key is not present
-    ch.insert("foo", "bar")
-    assert len(ch) == 1
-    assert ch["foo"] == "bar"
+    ht.insert("foo", "bar")
+    assert len(ht) == 1
+    assert ht["foo"] == "bar"
 
     # overwrite an item whose key already exists
-    ch.insert("foo", "baz")
-    assert len(ch) == 1
-    assert ch["foo"] == "baz"
+    ht.insert("foo", "baz")
+    assert len(ht) == 1
+    assert ht["foo"] == "baz"
 
     # verify the capacity is updated
-    ch.insert("bar", "foo")
-    assert len(ch) == 2
-    assert ch.capacity == 5
+    ht.insert("bar", "foo")
+    assert len(ht) == 2
+    assert ht.capacity == 5
 
 
 def test_get_method():
     """
     Verifies the get method returns correct value
     """
-    ch = ChainingHash()
-    ch.insert("foo", "bar")
+    ht = ChainingHashTable()
+    ht.insert("foo", "bar")
 
     # get an item whose key is present
-    assert ch.get("foo") == "bar"
+    assert ht.get("foo") == "bar"
 
     # get an item whose key is not present
-    assert ch.get("bar") is None
+    assert ht.get("bar") is None
 
     # get an item whose key is not present with default value
-    assert ch.get("bar", "") == ""
+    assert ht.get("bar", "") == ""
 
 
 def test_deletion():
     """
     Verifies the deletion functions correctly
     """
-    ch = ChainingHash()
-    ch.insert("foo", "bar")
+    ht = ChainingHashTable()
+    ht.insert("foo", "bar")
 
     # delete an item whose key presents
-    del ch["foo"]
-    assert "foo" not in ch
+    del ht["foo"]
+    assert "foo" not in ht
 
     # delete an item whose key isn't present
     with pytest.raises(KeyError):
-        del ch["foo"]
+        del ht["foo"]
 
 
 def test_items_methods():
     """
     Verifies that the items method returns a list of tuples of key-value
     """
-    ch = ChainingHash()
-    ch.insert("foo", "bar")
-    assert ch.items() == [("foo", "bar")]
+    ht = ChainingHashTable()
+    ht.insert("foo", "bar")
+    assert ht.items() == [("foo", "bar")]
