@@ -183,7 +183,6 @@ print(x is y)  # True
   ```math
   \alpha = \frac{n}{m}
   ```
-
   - Where:
     - $\alpha$: the load factor
     - $n$: the total number of stored keys (entries).
