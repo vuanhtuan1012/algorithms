@@ -153,7 +153,7 @@ print(x is y)  # True
 
 ### Definition
 
-- Hashing refers to the process of generating a fixed-size output from an input of variable size using **hash functions**. This technique **determines an index** or location for the storage of an item **in a data structure**.
+- Hashing refers to the process of generating a fixed-size output from an input of variable size using **hash functions**. This technique **determines an index** or location for the storage of an item **in a data structure** (**hash table**).
 - Hashing is **ideal for implementing key-value** data structures.
 -  It's **useful for many operations** such as: *searching*, *duplicate detection*, *caching*, *symbol tables*, *sets and maps*, *password verification*, etc. **since** it allows for average-case `O(1)` **time complexity** for insertion, deletion, and lookup.
 - **Components** of hashing:

@@ -2,7 +2,7 @@
 # @Author: VU Anh Tuan
 # @Date:   2025-11-12 09:43:28
 # @Last Modified by:   VU Anh Tuan
-# @Last Modified time: 2025-11-15 09:56:44
+# @Last Modified time: 2025-11-19 14:09:37
 """
 Test ChainingHashTable class
 """
@@ -13,7 +13,7 @@ from chaining_hash_table import ChainingHashTable
 
 def test_initialization():
     """
-    Verifies initialization of a chaining hash
+    Verifies initialization of a chaining hash table
     """
     ht = ChainingHashTable()
     assert len(ht) == 0
@@ -36,7 +36,7 @@ def test_insertion():
     assert len(ht) == 1
     assert ht["foo"] == "baz"
 
-    # verify the capacity is updated
+    # verify that the capacity expands when the load factor exceeds the rehashing threshold
     ht.insert("bar", "foo")
     assert len(ht) == 2
     assert ht.capacity == 5
